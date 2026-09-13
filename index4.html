@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+      <meta name="mobile-web-app-capable" content="yes">
+
   <title>Happy Birthday My Love</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -653,54 +655,7 @@
       .step[data-step="7"].active, .step[data-step="8"].active { height: auto; }
       .step[data-step="7"] > button, .step[data-step="8"] > button { margin-top: 14px !important; }
     }
-
-    /* Chrome mobile: make the page feel truly full-screen */
-    @media (max-width: 640px) {
-      html, body {
-        width: 100%;
-        min-height: 100%;
-        margin: 0;
-      }
-
-      body {
-        min-height: 100svh;
-        min-height: 100dvh;
-        padding: 0;
-      }
-
-      main {
-        width: 100%;
-        min-height: 100dvh;
-        padding: 0 !important;
-      }
-
-      .glass {
-        width: 100%;
-        min-height: 100dvh !important;
-        min-height: 100svh !important;
-        height: auto;
-        margin: 0;
-        border-radius: 0;
-        border-left: 0;
-        border-right: 0;
-        box-sizing: border-box;
-        padding:
-          max(18px, env(safe-area-inset-top))
-          max(16px, env(safe-area-inset-right))
-          max(18px, env(safe-area-inset-bottom))
-          max(16px, env(safe-area-inset-left));
-      }
-
-      /* Keep the ending cards content-sized rather than leaving a blank lower area. */
-      main:has(.step[data-step="7"].active) .glass,
-      main:has(.step[data-step="8"].active) .glass {
-        min-height: 100dvh !important;
-        height: 100dvh;
-        padding-bottom: max(18px, env(safe-area-inset-bottom));
-      }
-    }
-
-  </style>
+</style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-4 text-black relative">
 
@@ -826,7 +781,7 @@
           <!-- <div class="text-6xl mb-5 love-burst">💖</div> -->
           <h2 class="font-love text-5xl sm:text-7xl mb-6">Lots of love for you</h2>
           <p class="text-lg sm:text-xl leading-8 text-black/95">
-            Sending you all my love, warmest hugs, sweetest wishes, and countless little reasons to smile. You deserve all the love in the world today and every day. ❤️
+            Sending you all my love, warmest hugs, sweetest wishes, & countless little reasons to smile. You deserve all the love in the world today and every day. ❤️
           </p>
           <p class="font-love text-3xl sm:text-4xl mt-8">Forever yours 💕</p>
         </div>
