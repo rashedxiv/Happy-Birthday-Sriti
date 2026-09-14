@@ -1,952 +1,1393 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-      <meta name="mobile-web-app-capable" content="yes">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-  <title>Happy Birthday My Love</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
-      background: radial-gradient(circle at top, #ffdde8, #ffe9f2, #ffd1dc, #17001f);
-    }
-    .font-love { font-family: 'Pacifico', cursive; }
-
-    .heart {
-      position: fixed;
-      bottom: -40px;
-      color: rgba(255, 70, 130, 0.8);
-      animation: floatHeart linear infinite;
-      z-index: 1;
-      pointer-events: none;
-    }
-    @keyframes floatHeart {
-      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
-      15% { opacity: 1; }
-      100% { transform: translateY(-115vh) rotate(360deg) scale(1.8); opacity: 0; }
-    }
-
-    .sparkle {
-      position: fixed;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: white;
-      box-shadow: 0 0 15px white;
-      animation: sparkle 2s infinite ease-in-out;
-      z-index: 2;
-      pointer-events: none;
-    }
-    @keyframes sparkle {
-      0%, 100% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.3); opacity: 1; }
-    }
-
-    .step {
-      display: none;
-      animation: popIn .8s ease forwards;
-    }
-    .step.active { display: block; }
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(35px) scale(.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .glass {
-      background: rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      box-shadow: 0 25px 60px rgba(121, 0, 65, 0.28);
-    }
-
-    .gift-box {
-      width: 150px;
-      height: 115px;
-      background: linear-gradient(135deg, #ff3f8f, #ff8fb8);
-      border-radius: 18px;
-      position: relative;
-      margin: 0 auto;
-      animation: bounceGift 1.5s infinite;
-      cursor: pointer;
-      box-shadow: 0 20px 45px rgba(255, 45, 130, .45);
-    }
-    .gift-box::before {
-      content: '';
-      position: absolute;
-      width: 28px;
-      height: 115px;
-      background: #fff4b8;
-      left: 61px;
-      top: 0;
-    }
-    .gift-box::after {
-      content: '';
-      position: absolute;
-      width: 170px;
-      height: 28px;
-      background: #fff4b8;
-      left: -10px;
-      top: 42px;
-    }
-    .gift-lid {
-      width: 175px;
-      height: 38px;
-      background: linear-gradient(135deg, #ff1f7a, #ff72aa);
-      border-radius: 16px;
-      position: absolute;
-      top: -35px;
-      left: -12px;
-      transition: .5s ease;
-    }
-    .gift-box.open .gift-lid {
-      transform: rotate(-25deg) translate(-35px, -45px);
-    }
-    @keyframes bounceGift {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    .balloon {
-      position: absolute;
-      width: 60px;
-      height: 78px;
-      border-radius: 50% 50% 45% 45%;
-      animation: balloonFloat 4s ease-in-out infinite;
-      z-index: 0;
-    }
-    .balloon::after {
-      content: '';
-      position: absolute;
-      width: 2px;
-      height: 90px;
-      background: rgba(255,255,255,.6);
-      left: 50%;
-      top: 76px;
-    }
-    @keyframes balloonFloat {
-      0%,100% { transform: translateY(0) rotate(-3deg); }
-      50% { transform: translateY(-28px) rotate(4deg); }
-    }
-
-    .typing {
-      border-right: 3px solid #ff2e83;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: typing 3.5s steps(40), blink .7s infinite;
-    }
-    @keyframes typing { from { width: 0; } to { width: 100%; } }
-    @keyframes blink { 50% { border-color: transparent; } }
-
-    .cake {
-      position: relative;
-      width: 210px;
-      height: 135px;
-      margin: 0 auto;
-    }
-    .cake-base {
-      position: absolute;
-      bottom: 0;
-      width: 210px;
-      height: 85px;
-      background: linear-gradient(180deg, #ff78ad, #ff2f86);
-      border-radius: 18px 18px 28px 28px;
-      box-shadow: 0 18px 35px rgba(255, 47, 134, .38);
-    }
-    .cake-top {
-      position: absolute;
-      bottom: 70px;
-      width: 210px;
-      height: 40px;
-      background: #fff7fb;
-      border-radius: 50%;
-    }
-    .candle {
-      position: absolute;
-      bottom: 105px;
-      left: 96px;
-      width: 18px;
-      height: 45px;
-      background: repeating-linear-gradient(45deg, #fff, #fff 6px, #ff4d94 6px, #ff4d94 12px);
-      border-radius: 8px;
-    }
-    .flame {
-      position: absolute;
-      bottom: 146px;
-      left: 95px;
-      width: 20px;
-      height: 30px;
-      background: radial-gradient(circle, #fff7a1 20%, #ffb300 60%, #ff4d00 100%);
-      border-radius: 50% 50% 50% 50%;
-      animation: flame .25s infinite alternate;
-      transform-origin: bottom;
-    }
-    @keyframes flame {
-      from { transform: scale(1) rotate(-3deg); }
-      to { transform: scale(1.15) rotate(3deg); }
-    }
-
-    .confetti {
-      position: fixed;
-      top: -20px;
-      width: 10px;
-      height: 16px;
-      animation: confettiFall 3s linear forwards;
-      z-index: 40;
-    }
-    @keyframes confettiFall {
-      to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-    }
-
-    .shake { animation: shake .45s ease; }
-    @keyframes shake {
-      0%,100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 1.5rem;
-    }
-    .gallery-item {
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.35);
-      background: rgba(255,255,255,.15);
-      box-shadow: 0 12px 28px rgba(121,0,65,.18);
-      cursor: pointer;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .35s ease;
-    }
-    .gallery-item:hover img { transform: scale(1.08); }
-    .gallery-note {
-      font-size: .85rem;
-      opacity: .8;
-      margin-top: .75rem;
-    }
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(15,0,20,.82);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      padding: 20px;
-      backdrop-filter: blur(8px);
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: min(900px, 95vw);
-      max-height: 85vh;
-      object-fit: contain;
-      border-radius: 20px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.5);
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-    }
-
-    /* ending photo 2 */
-.ending-photo2-wrap{
-      position:relative;
-      width:min(290px,78vw);
-      aspect-ratio:1/1;
-      margin:0 auto 30px;
-      transform:rotate(-45deg);
-      animation:photoFloat 3.5s ease-in-out infinite;
-      filter:drop-shadow(0 20px 30px rgba(121,0,65,.28));
-    }
-    .ending-photo2-wrap::before,
-    .ending-photo2-wrap::after{
-      content:'';
-      position:absolute;
-      width:100%;
-      height:100%;
-      border-radius:50%;
-      background:inherit;
-      z-index:0;
-    }
-    .ending-photo2-wrap::before{top:-50%;left:0}
-    .ending-photo2-wrap::after{top:0;left:50%}
-    .ending-photo2{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      clip-path:polygon(50% 100%,0 50%,0 0,50% 0,100% 0,100% 50%);
-      transition:transform .6s ease;
-      z-index:1;
-    }
-    .ending-photo2-wrap:hover .ending-photo2{transform:scale(1.08)}
-    .ending-photo2-wrap + .ending-photo2-caption{margin-top:10px}
-    /* ending photo 2 */
-
-    .pop-balloon-card{position:relative;min-height:390px;overflow:hidden;border-radius:28px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:28px 18px 20px}.pop-balloon-area{position:relative;height:260px;max-width:620px;margin:10px auto 0}.pop-balloon{position:absolute;width:76px;height:98px;border-radius:50% 50% 45% 45%;cursor:pointer;box-shadow:inset -12px -10px 18px rgba(0,0,0,.12),0 14px 28px rgba(121,0,65,.18);transition:transform .18s ease,opacity .25s ease;animation:popBalloonFloat 2.8s ease-in-out infinite;z-index:2;border:0}.pop-balloon:hover{transform:scale(1.08)}.pop-balloon::before{content:'';position:absolute;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.72);top:17px;left:18px}.pop-balloon::after{content:'';position:absolute;width:2px;height:92px;background:rgba(255,255,255,.65);left:50%;top:96px}.pop-balloon.pop{animation:balloonPop .35s ease forwards;pointer-events:none}@keyframes popBalloonFloat{0%,100%{margin-top:0}50%{margin-top:-13px}}@keyframes balloonPop{0%{transform:scale(1);opacity:1}55%{transform:scale(1.35);opacity:.85}100%{transform:scale(0);opacity:0}}.pop-count{display:inline-block;margin-top:12px;background:rgba(255,255,255,.35);padding:8px 18px;border-radius:999px;font-weight:700}
-    .ending-photo-wrap{position:relative;width:min(300px,85vw);height:200px;margin:0 auto 26px;border-radius:26px;overflow:hidden;border:3px solid rgba(255,255,255,.55);box-shadow:0 20px 55px rgba(121,0,65,.28);animation:photoFloat 3.5s ease-in-out infinite}
-    .ending-photo-wrap::before{content:'♥';position:absolute;z-index:2;top:10px;right:14px;font-size:28px;color:white;text-shadow:0 3px 12px rgba(121,0,65,.45);animation:heartBeat 1.2s ease-in-out infinite}
-    .ending-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-    .ending-photo-wrap:hover .ending-photo{transform:scale(1.08)}
-    @keyframes photoFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}
-    @keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
-    .love-burst{display:inline-block;animation:loveBurst 1.8s ease-in-out infinite}
-    @keyframes loveBurst{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.12) rotate(4deg)}}
-
-
-    /* iPhone / mobile responsive improvements */
-    html { min-height: 100%; }
-    body {
-      min-height: 100svh;
-      min-height: 100dvh;
-      width: 100%;
-      padding: max(12px, env(safe-area-inset-top))
-               max(12px, env(safe-area-inset-right))
-               max(12px, env(safe-area-inset-bottom))
-               max(12px, env(safe-area-inset-left));
-      overflow-x: hidden;
-      overflow-y: auto;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    main {
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .glass {
-      width: 100%;
-      min-height: min(560px, calc(100dvh - 32px));
-      max-height: none;
-      padding: clamp(18px, 5vw, 40px);
-      overflow: visible;
-    }
-
-    .step {
-      width: 100%;
-      min-width: 0;
-    }
-
-    .step h1,
-    .step h2 {
-      overflow-wrap: anywhere;
-      line-height: 1.12;
-    }
-
-    .step p {
-      overflow-wrap: anywhere;
-    }
-
-    button {
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      max-width: 100%;
-    }
-
-    #musicToggle {
-      top: max(12px, env(safe-area-inset-top));
-      right: max(12px, env(safe-area-inset-right));
-      padding: 9px 12px;
-      font-size: 12px;
-      z-index: 60;
-    }
-
-    .balloon {
-      transform-origin: center;
-    }
-
-    .gallery-grid {
-      width: 100%;
-    }
-
-    .gallery-item {
-      min-width: 0;
-    }
-
-    .lightbox {
-      padding:
-        max(16px, env(safe-area-inset-top))
-        max(16px, env(safe-area-inset-right))
-        max(16px, env(safe-area-inset-bottom))
-        max(16px, env(safe-area-inset-left));
-    }
-
-    .lightbox img {
-      max-width: 94vw;
-      max-height: 78dvh;
-    }
-
-    .lightbox-close {
-      top: max(12px, env(safe-area-inset-top));
-      right: max(14px, env(safe-area-inset-right));
-      font-size: 1.7rem;
-      padding: 8px;
-    }
-
-    .ending-photo-wrap {
-      width: min(300px, 78vw);
-      height: min(200px, 52vw);
-    }
-
-    .ending-photo2-wrap {
-      width: min(270px, 66vw);
-    }
-
-    .pop-balloon-card {
-      min-height: 0;
-      padding: 20px 12px 16px;
-    }
-
-    .pop-balloon-area {
-      width: 100%;
-      height: clamp(205px, 55vw, 260px);
-    }
-
-    .pop-balloon {
-      width: clamp(52px, 15vw, 76px);
-      height: clamp(70px, 19vw, 98px);
-    }
-
-    .pop-balloon::after {
-      height: clamp(65px, 18vw, 92px);
-      top: clamp(68px, 18vw, 96px);
-    }
-
-    .cake {
-      transform: scale(.86);
-      transform-origin: center;
-      margin-bottom: -4px;
-    }
-
-    @media (max-width: 640px) {
+    <title>Happy Birthday My Love</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
-        align-items: flex-start;
-        justify-content: center;
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
+        background: radial-gradient(
+          circle at top,
+          #ffdde8,
+          #ffe9f2,
+          #ffd1dc,
+          #17001f
+        );
       }
-
-      main {
-        padding-top: 8px;
-        padding-bottom: 8px;
-      }
-
-      .glass {
-        border-radius: 24px;
-        min-height: calc(100dvh - 32px);
-        padding: 22px 16px;
-      }
-
-      .step h1.font-love {
-        font-size: clamp(2.65rem, 12vw, 4.4rem);
-      }
-
-      .step h2.font-love {
-        font-size: clamp(2.05rem, 10vw, 3.6rem);
-      }
-
-      .step p {
-        font-size: clamp(.92rem, 4.2vw, 1.15rem);
-        line-height: 1.65;
-      }
-
-      .step[data-step="0"] p {
-        max-width: 330px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .step[data-step="1"] .relative.h-72 {
-        height: min(52vh, 290px);
-        min-height: 220px;
-      }
-
-      #catchHeart {
-        font-size: 3.4rem;
-      }
-
-      .gift-box {
-        transform: scale(.82);
-        transform-origin: center;
-        margin-top: -8px;
-        margin-bottom: -8px;
-      }
-
-      .step[data-step="2"] #giftMessage {
-        font-size: 1.15rem;
-        line-height: 1.55;
-        margin-top: 18px;
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-        margin-top: 1.15rem;
-      }
-
-      .gallery-item {
-        border-radius: 14px;
-      }
-
-      .step[data-step="4"] button,
-      .step[data-step="5"] button,
-      .step[data-step="6"] button,
-      .step[data-step="7"] button,
-      .step[data-step="8"] button,
-      .step[data-step="0"] button {
-        width: min(100%, 310px);
-        padding: 13px 18px;
-        font-size: .92rem;
-      }
-
-      .step[data-step="6"] .max-w-2xl,
-      .step[data-step="7"] .max-w-2xl,
-      .step[data-step="8"] .max-w-2xl {
-        width: 100%;
-      }
-
-      .step[data-step="6"] .max-w-2xl {
-        padding: 18px;
-        border-radius: 20px;
-      }
-
-      .step[data-step="7"] .max-w-2xl,
-      .step[data-step="8"] .max-w-2xl {
-        padding: 20px 16px;
-        border-radius: 22px;
-      }
-
-      .step[data-step="6"] .max-w-2xl p,
-      .step[data-step="7"] .max-w-2xl p,
-      .step[data-step="8"] .max-w-2xl p {
-        font-size: .98rem;
-        line-height: 1.7;
-      }
-
-      .ending-photo-wrap {
-        width: min(285px, 76vw);
-        height: min(190px, 50vw);
-        margin-bottom: 20px;
-      }
-
-      .ending-photo2-wrap {
-        width: min(245px, 62vw);
-        margin-bottom: 22px;
-      }
-
-      .ending-photo2-caption {
-        margin-top: 0;
-      }
-
-      .pop-balloon-card h2 {
-        font-size: clamp(2rem, 9.5vw, 3.5rem);
-      }
-
-      .pop-balloon-card > p {
-        margin-bottom: 4px;
-      }
-
-      .pop-count {
-        padding: 7px 14px;
-        font-size: .9rem;
-      }
-
-      .balloon {
-        width: 42px;
-        height: 58px;
-        opacity: .75;
-      }
-
-      .balloon::after {
-        height: 65px;
-        top: 56px;
-      }
-
-      .sparkle {
-        width: 5px;
-        height: 5px;
+      .font-love {
+        font-family: "Pacifico", cursive;
       }
 
       .heart {
-        font-size: 16px !important;
+        position: fixed;
+        bottom: -40px;
+        color: rgba(255, 70, 130, 0.8);
+        animation: floatHeart linear infinite;
+        z-index: 1;
+        pointer-events: none;
       }
-    }
+      @keyframes floatHeart {
+        0% {
+          transform: translateY(0) rotate(0deg) scale(1);
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-115vh) rotate(360deg) scale(1.8);
+          opacity: 0;
+        }
+      }
 
-    @media (max-width: 390px) {
+      .sparkle {
+        position: fixed;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: white;
+        box-shadow: 0 0 15px white;
+        animation: sparkle 2s infinite ease-in-out;
+        z-index: 2;
+        pointer-events: none;
+      }
+      @keyframes sparkle {
+        0%,
+        100% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+      }
+
+      .step {
+        display: none;
+        animation: popIn 0.8s ease forwards;
+      }
+      .step.active {
+        display: block;
+      }
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: translateY(35px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
       .glass {
-        padding: 18px 12px;
+        background: rgba(255, 255, 255, 0.22);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 25px 60px rgba(121, 0, 65, 0.28);
       }
 
-      .step h1.font-love {
-        font-size: 2.5rem;
+      .gift-box {
+        width: 150px;
+        height: 115px;
+        background: linear-gradient(135deg, #ff3f8f, #ff8fb8);
+        border-radius: 18px;
+        position: relative;
+        margin: 0 auto;
+        animation: bounceGift 1.5s infinite;
+        cursor: pointer;
+        box-shadow: 0 20px 45px rgba(255, 45, 130, 0.45);
+      }
+      .gift-box::before {
+        content: "";
+        position: absolute;
+        width: 28px;
+        height: 115px;
+        background: #fff4b8;
+        left: 61px;
+        top: 0;
+      }
+      .gift-box::after {
+        content: "";
+        position: absolute;
+        width: 170px;
+        height: 28px;
+        background: #fff4b8;
+        left: -10px;
+        top: 42px;
+      }
+      .gift-lid {
+        width: 175px;
+        height: 38px;
+        background: linear-gradient(135deg, #ff1f7a, #ff72aa);
+        border-radius: 16px;
+        position: absolute;
+        top: -35px;
+        left: -12px;
+        transition: 0.5s ease;
+      }
+      .gift-box.open .gift-lid {
+        transform: rotate(-25deg) translate(-35px, -45px);
+      }
+      @keyframes bounceGift {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
       }
 
-      .step h2.font-love {
-        font-size: 2rem;
+      .balloon {
+        position: absolute;
+        width: 60px;
+        height: 78px;
+        border-radius: 50% 50% 45% 45%;
+        animation: balloonFloat 4s ease-in-out infinite;
+        z-index: 0;
+      }
+      .balloon::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 90px;
+        background: rgba(255, 255, 255, 0.6);
+        left: 50%;
+        top: 76px;
+      }
+      @keyframes balloonFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-3deg);
+        }
+        50% {
+          transform: translateY(-28px) rotate(4deg);
+        }
       }
 
-      .ending-photo2-wrap {
-        width: 58vw;
+      .typing {
+        border-right: 3px solid #ff2e83;
+        white-space: nowrap;
+        overflow: hidden;
+        animation:
+          typing 3.5s steps(40),
+          blink 0.7s infinite;
+      }
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
       }
 
       .cake {
-        transform: scale(.74);
-        margin-top: -18px;
-        margin-bottom: -22px;
+        position: relative;
+        width: 210px;
+        height: 135px;
+        margin: 0 auto;
       }
-    }
+      .cake-base {
+        position: absolute;
+        bottom: 0;
+        width: 210px;
+        height: 85px;
+        background: linear-gradient(180deg, #ff78ad, #ff2f86);
+        border-radius: 18px 18px 28px 28px;
+        box-shadow: 0 18px 35px rgba(255, 47, 134, 0.38);
+      }
+      .cake-top {
+        position: absolute;
+        bottom: 70px;
+        width: 210px;
+        height: 40px;
+        background: #fff7fb;
+        border-radius: 50%;
+      }
+      .candle {
+        position: absolute;
+        bottom: 105px;
+        left: 96px;
+        width: 18px;
+        height: 45px;
+        background: repeating-linear-gradient(
+          45deg,
+          #fff,
+          #fff 6px,
+          #ff4d94 6px,
+          #ff4d94 12px
+        );
+        border-radius: 8px;
+      }
+      .flame {
+        position: absolute;
+        bottom: 146px;
+        left: 95px;
+        width: 20px;
+        height: 30px;
+        background: radial-gradient(
+          circle,
+          #fff7a1 20%,
+          #ffb300 60%,
+          #ff4d00 100%
+        );
+        border-radius: 50% 50% 50% 50%;
+        animation: flame 0.25s infinite alternate;
+        transform-origin: bottom;
+      }
+      @keyframes flame {
+        from {
+          transform: scale(1) rotate(-3deg);
+        }
+        to {
+          transform: scale(1.15) rotate(3deg);
+        }
+      }
 
-    @media (max-height: 700px) and (max-width: 640px) {
+      .confetti {
+        position: fixed;
+        top: -20px;
+        width: 10px;
+        height: 16px;
+        animation: confettiFall 3s linear forwards;
+        z-index: 40;
+      }
+      @keyframes confettiFall {
+        to {
+          transform: translateY(110vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+
+      .shake {
+        animation: shake 0.45s ease;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-8px);
+        }
+        75% {
+          transform: translateX(8px);
+        }
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 1.5rem;
+      }
+      .gallery-item {
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 12px 28px rgba(121, 0, 65, 0.18);
+        cursor: pointer;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.35s ease;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.08);
+      }
+      .gallery-note {
+        font-size: 0.85rem;
+        opacity: 0.8;
+        margin-top: 0.75rem;
+      }
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 0, 20, 0.82);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        padding: 20px;
+        backdrop-filter: blur(8px);
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lightbox img {
+        max-width: min(900px, 95vw);
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 20px;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+      }
+      .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+      }
+
+      /* ending photo 2 */
+      .ending-photo2-wrap {
+        position: relative;
+        width: min(290px, 78vw);
+        aspect-ratio: 1/1;
+        margin: 0 auto 30px;
+        transform: rotate(-45deg);
+        animation: photoFloat 3.5s ease-in-out infinite;
+        filter: drop-shadow(0 20px 30px rgba(121, 0, 65, 0.28));
+      }
+      .ending-photo2-wrap::before,
+      .ending-photo2-wrap::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: inherit;
+        z-index: 0;
+      }
+      .ending-photo2-wrap::before {
+        top: -50%;
+        left: 0;
+      }
+      .ending-photo2-wrap::after {
+        top: 0;
+        left: 50%;
+      }
+      .ending-photo2 {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        clip-path: polygon(50% 100%, 0 50%, 0 0, 50% 0, 100% 0, 100% 50%);
+        transition: transform 0.6s ease;
+        z-index: 1;
+      }
+      .ending-photo2-wrap:hover .ending-photo2 {
+        transform: scale(1.08);
+      }
+      .ending-photo2-wrap + .ending-photo2-caption {
+        margin-top: 10px;
+      }
+      /* ending photo 2 */
+
+      .pop-balloon-card {
+        position: relative;
+        min-height: 390px;
+        overflow: hidden;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 28px 18px 20px;
+      }
+      .pop-balloon-area {
+        position: relative;
+        height: 260px;
+        max-width: 620px;
+        margin: 10px auto 0;
+      }
+      .pop-balloon {
+        position: absolute;
+        width: 76px;
+        height: 98px;
+        border-radius: 50% 50% 45% 45%;
+        cursor: pointer;
+        box-shadow:
+          inset -12px -10px 18px rgba(0, 0, 0, 0.12),
+          0 14px 28px rgba(121, 0, 65, 0.18);
+        transition:
+          transform 0.18s ease,
+          opacity 0.25s ease;
+        animation: popBalloonFloat 2.8s ease-in-out infinite;
+        z-index: 2;
+        border: 0;
+      }
+      .pop-balloon:hover {
+        transform: scale(1.08);
+      }
+      .pop-balloon::before {
+        content: "";
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.72);
+        top: 17px;
+        left: 18px;
+      }
+      .pop-balloon::after {
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 92px;
+        background: rgba(255, 255, 255, 0.65);
+        left: 50%;
+        top: 96px;
+      }
+      .pop-balloon.pop {
+        animation: balloonPop 0.35s ease forwards;
+        pointer-events: none;
+      }
+      @keyframes popBalloonFloat {
+        0%,
+        100% {
+          margin-top: 0;
+        }
+        50% {
+          margin-top: -13px;
+        }
+      }
+      @keyframes balloonPop {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        55% {
+          transform: scale(1.35);
+          opacity: 0.85;
+        }
+        100% {
+          transform: scale(0);
+          opacity: 0;
+        }
+      }
+      .pop-count {
+        display: inline-block;
+        margin-top: 12px;
+        background: rgba(255, 255, 255, 0.35);
+        padding: 8px 18px;
+        border-radius: 999px;
+        font-weight: 700;
+      }
+      .ending-photo-wrap {
+        position: relative;
+        width: min(300px, 85vw);
+        height: 200px;
+        margin: 0 auto 26px;
+        border-radius: 26px;
+        overflow: hidden;
+        border: 3px solid rgba(255, 255, 255, 0.55);
+        box-shadow: 0 20px 55px rgba(121, 0, 65, 0.28);
+        animation: photoFloat 3.5s ease-in-out infinite;
+      }
+      .ending-photo-wrap::before {
+        content: "♥";
+        position: absolute;
+        z-index: 2;
+        top: 10px;
+        right: 14px;
+        font-size: 28px;
+        color: white;
+        text-shadow: 0 3px 12px rgba(121, 0, 65, 0.45);
+        animation: heartBeat 1.2s ease-in-out infinite;
+      }
+      .ending-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s ease;
+      }
+      .ending-photo-wrap:hover .ending-photo {
+        transform: scale(1.08);
+      }
+      @keyframes photoFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-1deg);
+        }
+        50% {
+          transform: translateY(-9px) rotate(1deg);
+        }
+      }
+      @keyframes heartBeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.3);
+        }
+      }
+      .love-burst {
+        display: inline-block;
+        animation: loveBurst 1.8s ease-in-out infinite;
+      }
+      @keyframes loveBurst {
+        0%,
+        100% {
+          transform: scale(1) rotate(0);
+        }
+        50% {
+          transform: scale(1.12) rotate(4deg);
+        }
+      }
+
+      /* iPhone / mobile responsive improvements */
+      html {
+        min-height: 100%;
+      }
+      body {
+        min-height: 100svh;
+        min-height: 100dvh;
+        width: 100%;
+        padding: max(12px, env(safe-area-inset-top))
+          max(12px, env(safe-area-inset-right))
+          max(12px, env(safe-area-inset-bottom))
+          max(12px, env(safe-area-inset-left));
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      main {
+        width: 100%;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
       .glass {
-        min-height: calc(100dvh - 20px);
-        padding-top: 16px;
-        padding-bottom: 16px;
+        width: 100%;
+        min-height: min(560px, calc(100dvh - 32px));
+        max-height: none;
+        padding: clamp(18px, 5vw, 40px);
+        overflow: visible;
       }
 
-      .step[data-step="1"] .relative.h-72 {
-        height: 220px;
+      .step {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .step h1,
+      .step h2 {
+        overflow-wrap: anywhere;
+        line-height: 1.12;
+      }
+
+      .step p {
+        overflow-wrap: anywhere;
+      }
+
+      button {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        max-width: 100%;
+      }
+
+      #musicToggle {
+        top: max(12px, env(safe-area-inset-top));
+        right: max(12px, env(safe-area-inset-right));
+        padding: 9px 12px;
+        font-size: 12px;
+        z-index: 60;
+      }
+
+      .balloon {
+        transform-origin: center;
+      }
+
+      .gallery-grid {
+        width: 100%;
+      }
+
+      .gallery-item {
+        min-width: 0;
+      }
+
+      .lightbox {
+        padding: max(16px, env(safe-area-inset-top))
+          max(16px, env(safe-area-inset-right))
+          max(16px, env(safe-area-inset-bottom))
+          max(16px, env(safe-area-inset-left));
+      }
+
+      .lightbox img {
+        max-width: 94vw;
+        max-height: 78dvh;
+      }
+
+      .lightbox-close {
+        top: max(12px, env(safe-area-inset-top));
+        right: max(14px, env(safe-area-inset-right));
+        font-size: 1.7rem;
+        padding: 8px;
       }
 
       .ending-photo-wrap {
-        height: 145px;
+        width: min(300px, 78vw);
+        height: min(200px, 52vw);
       }
 
       .ending-photo2-wrap {
-        width: 190px;
+        width: min(270px, 66vw);
       }
-    }
 
-    @media (max-width: 640px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 9px; }
-    }
-  
-    @media (max-width: 640px) {
-      .gift-lid {
-        max-width: 175px;
+      .pop-balloon-card {
+        min-height: 0;
+        padding: 20px 12px 16px;
       }
-      .typing {
-        white-space: normal;
-        animation: none;
-        border-right: 0;
+
+      .pop-balloon-area {
+        width: 100%;
+        height: clamp(205px, 55vw, 260px);
       }
-    }
 
-  
-    @media (max-width: 640px) {
-      main:has(.step[data-step="7"].active) .glass,
-      main:has(.step[data-step="8"].active) .glass { min-height: 0; height: auto; padding-top: 18px; padding-bottom: 18px; }
-      .step[data-step="7"].active, .step[data-step="8"].active { height: auto; }
-      .step[data-step="7"] > button, .step[data-step="8"] > button { margin-top: 14px !important; }
-    }
-</style>
-</head>
-<body class="min-h-screen flex items-center justify-center px-4 text-black relative">
+      .pop-balloon {
+        width: clamp(52px, 15vw, 76px);
+        height: clamp(70px, 19vw, 98px);
+      }
 
-  <!-- Background Music -->
-  <audio id="bgMusic" loop preload="auto">
-    <source src="music/birthday-music.mp3" type="audio/mpeg">
-  </audio>
-  <button id="musicToggle" onclick="toggleMusic()" aria-label="Toggle background music"
-    class="fixed top-5 right-5 z-50 bg-white/80 text-pink-600 px-4 py-3 rounded-full font-bold shadow-xl backdrop-blur hover:scale-105 transition">
-    🎵 Music: Off
-  </button>
+      .pop-balloon::after {
+        height: clamp(65px, 18vw, 92px);
+        top: clamp(68px, 18vw, 96px);
+      }
 
-  <div class="balloon bg-pink-400 left-8 top-20"></div>
-  <div class="balloon bg-purple-400 right-10 top-28" style="animation-delay:1s"></div>
-  <div class="balloon bg-yellow-300 left-1/4 bottom-16" style="animation-delay:2s"></div>
-  <div class="balloon bg-red-400 right-1/4 bottom-20" style="animation-delay:.5s"></div>
+      .cake {
+        transform: scale(0.86);
+        transform-origin: center;
+        margin-bottom: -4px;
+      }
 
-  <main class="relative z-10 w-full max-w-3xl">
-    <div class="glass rounded-[2rem] p-6 sm:p-10 text-center min-h-[560px] flex items-center justify-center">
-      <section class="step active w-full" data-step="0">
-        <p class="uppercase tracking-[.35em] text-sm text-black mb-4">A tiny surprise for you</p>
-        <h1 class="font-love text-5xl sm:text-7xl text-black drop-shadow-lg mb-6">Hey Beautiful</h1>
-        <p class="text-lg sm:text-xl text-black/90 max-w-xl mx-auto mb-8">Today is not just another day. It is the day my favorite person came into this world.</p>
-        <button onclick="nextStep()" class="bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition">Open Your Surprise 💝</button>
-      </section>
+      @media (max-width: 640px) {
+        body {
+          align-items: flex-start;
+          justify-content: center;
+        }
 
-      <section class="step w-full" data-step="1">
-        <h2 class="font-love text-4xl sm:text-6xl mb-5">First, catch my heart</h2>
-        <p class="mb-6 text-black/90">Click the floating heart 5 times to unlock your birthday wish.</p>
-        <div class="relative h-72 rounded-3xl bg-white/15 overflow-hidden border border-white/20" id="heartGame">
-          <button id="catchHeart" class="absolute text-6xl hover:scale-150 transition">💖</button>
-          <div class="absolute left-4 top-4 bg-white/25 px-4 py-2 rounded-full">Caught: <span id="score">0</span>/5</div>
-        </div>
-      </section>
+        main {
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
 
-      <section class="step w-full" data-step="2">
-        <h2 class="font-love text-4xl sm:text-6xl mb-7 text-transform: uppercase;">A Gift For You</h2>
-        <p class="mb-10 text-black/90 ">Tap the gift box gently.</p>
-        <div class="gift-box" onclick="openGift(this)">
-          <div class="gift-lid"></div>
-        </div>
-        <p id="giftMessage" class="hidden mt-10 text-2xl font-semibold text-black">Inside this gift is my love, my prayers, and my forever smile for you. 🥺❤️</p>
-      </section>
+        .glass {
+          border-radius: 24px;
+          min-height: calc(100dvh - 32px);
+          padding: 22px 16px;
+        }
 
+        .step h1.font-love {
+          font-size: clamp(2.65rem, 12vw, 4.4rem);
+        }
 
-      <section class="step w-full" data-step="3"><div class="pop-balloon-card"><h2 class="font-love text-4xl sm:text-6xl mb-3">Pop the Balloons 🎈</h2><p class="text-black/90">Pop all 4 balloons to continue! 💕</p><div class="pop-count">Popped: <span id="balloonScore">0</span>/4</div><div class="pop-balloon-area"><button class="pop-balloon bg-pink-400" style="left:8%;top:45px" onclick="popBalloon(this)" aria-label="Pop balloon 1"></button><button class="pop-balloon bg-purple-400" style="left:31%;top:5px" onclick="popBalloon(this)" aria-label="Pop balloon 2"></button><button class="pop-balloon bg-yellow-300" style="left:54%;top:55px" onclick="popBalloon(this)" aria-label="Pop balloon 3"></button><button class="pop-balloon bg-red-400" style="left:77%;top:15px" onclick="popBalloon(this)" aria-label="Pop balloon 4"></button></div></div></section>
+        .step h2.font-love {
+          font-size: clamp(2.05rem, 10vw, 3.6rem);
+        }
 
-      <section class="step w-full" data-step="4">
-        <h2 class="font-love text-4xl sm:text-6xl mb-3">Our Memories 📸</h2>
-        <p class="text-black/90">A little gallery of our favorite moments.</p>
+        .step p {
+          font-size: clamp(0.92rem, 4.2vw, 1.15rem);
+          line-height: 1.65;
+        }
 
-        <div class="gallery-grid">
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="images/photo1.jpg" alt="Memory 1">
+        .step[data-step="0"] p {
+          max-width: 330px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .step[data-step="2"] .relative.h-72 {
+          height: min(52vh, 290px);
+          min-height: 220px;
+        }
+
+        #catchHeart {
+          font-size: 3.4rem;
+        }
+
+        .gift-box {
+          transform: scale(0.82);
+          transform-origin: center;
+          margin-top: -8px;
+          margin-bottom: -8px;
+        }
+
+        .step[data-step="3"] #giftMessage {
+          font-size: 1.15rem;
+          line-height: 1.55;
+          margin-top: 18px;
+        }
+
+        .gallery-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px;
+          margin-top: 1.15rem;
+        }
+
+        .gallery-item {
+          border-radius: 14px;
+        }
+
+        .step[data-step="5"] button,
+        .step[data-step="6"] button,
+        .step[data-step="7"] button,
+        .step[data-step="8"] button,
+        .step[data-step="9"] button,
+        .step[data-step="0"] button {
+          width: min(100%, 310px);
+          padding: 13px 18px;
+          font-size: 0.92rem;
+        }
+
+        .step[data-step="7"] .max-w-2xl,
+        .step[data-step="8"] .max-w-2xl,
+        .step[data-step="9"] .max-w-2xl {
+          width: 100%;
+        }
+
+        .step[data-step="7"] .max-w-2xl {
+          padding: 18px;
+          border-radius: 20px;
+        }
+
+        .step[data-step="8"] .max-w-2xl,
+        .step[data-step="9"] .max-w-2xl {
+          padding: 20px 16px;
+          border-radius: 22px;
+        }
+
+        .step[data-step="7"] .max-w-2xl p,
+        .step[data-step="8"] .max-w-2xl p,
+        .step[data-step="9"] .max-w-2xl p {
+          font-size: 0.98rem;
+          line-height: 1.7;
+        }
+
+        .ending-photo-wrap {
+          width: min(285px, 76vw);
+          height: min(190px, 50vw);
+          margin-bottom: 20px;
+        }
+
+        .ending-photo2-wrap {
+          width: min(245px, 62vw);
+          margin-bottom: 22px;
+        }
+
+        .ending-photo2-caption {
+          margin-top: 0;
+        }
+
+        .pop-balloon-card h2 {
+          font-size: clamp(2rem, 9.5vw, 3.5rem);
+        }
+
+        .pop-balloon-card > p {
+          margin-bottom: 4px;
+        }
+
+        .pop-count {
+          padding: 7px 14px;
+          font-size: 0.9rem;
+        }
+
+        .balloon {
+          width: 42px;
+          height: 58px;
+          opacity: 0.75;
+        }
+
+        .balloon::after {
+          height: 65px;
+          top: 56px;
+        }
+
+        .sparkle {
+          width: 5px;
+          height: 5px;
+        }
+
+        .heart {
+          font-size: 16px !important;
+        }
+      }
+
+      @media (max-width: 390px) {
+        .glass {
+          padding: 18px 12px;
+        }
+
+        .step h1.font-love {
+          font-size: 2.5rem;
+        }
+
+        .step h2.font-love {
+          font-size: 2rem;
+        }
+
+        .ending-photo2-wrap {
+          width: 58vw;
+        }
+
+        .cake {
+          transform: scale(0.74);
+          margin-top: -18px;
+          margin-bottom: -22px;
+        }
+      }
+
+      @media (max-height: 700px) and (max-width: 640px) {
+        .glass {
+          min-height: calc(100dvh - 20px);
+          padding-top: 16px;
+          padding-bottom: 16px;
+        }
+
+        .step[data-step="2"] .relative.h-72 {
+          height: 220px;
+        }
+
+        .ending-photo-wrap {
+          height: 145px;
+        }
+
+        .ending-photo2-wrap {
+          width: 190px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 9px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .gift-lid {
+          max-width: 175px;
+        }
+        .typing {
+          white-space: normal;
+          animation: none;
+          border-right: 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        main:has(.step[data-step="8"].active) .glass,
+        main:has(.step[data-step="9"].active) .glass {
+          min-height: 0;
+          height: auto;
+          padding-top: 18px;
+          padding-bottom: 18px;
+        }
+        .step[data-step="8"].active,
+        .step[data-step="9"].active {
+          height: auto;
+        }
+        .step[data-step="8"] > button,
+        .step[data-step="9"] > button {
+          margin-top: 14px !important;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex items-center justify-center px-4 text-black relative"
+  >
+    <!-- Background Music -->
+    <audio id="bgMusic" loop preload="auto">
+      <source src="music/birthday-music.mp3" type="audio/mpeg" />
+    </audio>
+    <button
+      id="musicToggle"
+      onclick="toggleMusic()"
+      aria-label="Toggle background music"
+      class="fixed top-5 right-5 z-50 bg-white/80 text-pink-600 px-4 py-3 rounded-full font-bold shadow-xl backdrop-blur hover:scale-105 transition"
+    >
+      🎵 Music: Off
+    </button>
+
+    <div class="balloon bg-pink-400 left-8 top-20"></div>
+    <div
+      class="balloon bg-purple-400 right-10 top-28"
+      style="animation-delay: 1s"
+    ></div>
+    <div
+      class="balloon bg-yellow-300 left-1/4 bottom-16"
+      style="animation-delay: 2s"
+    ></div>
+    <div
+      class="balloon bg-red-400 right-1/4 bottom-20"
+      style="animation-delay: 0.5s"
+    ></div>
+
+    <main class="relative z-10 w-full max-w-3xl">
+      <div
+        class="glass rounded-[2rem] p-6 sm:p-10 text-center min-h-[560px] flex items-center justify-center"
+      >
+        <section class="step active w-full" data-step="0">
+          <div class="max-w-2xl mx-auto glass rounded-3xl p-6 sm:p-10 border border-white/30">
+            <div class="w-full max-w-[220px] mx-auto aspect-[4/5] rounded-3xl overflow-hidden border-4 border-white/60 shadow-2xl mb-6">
+              <img src="images/photo1.jpg" alt="Rokeya Akanda Sriti" class="w-full h-full object-cover" />
+            </div>
+            <p class="uppercase tracking-[.25em] text-sm text-pink-600 font-semibold mb-3">A little introduction 💕</p>
+            <h1 class="font-love text-4xl sm:text-6xl text-pink-600 mb-4">Meet Rokeya Akanda Sriti</h1>
+            <p class="text-base sm:text-lg italic text-black/90 leading-7 max-w-xl mx-auto mb-7">Meet the beautiful soul who makes ordinary moments feel special. This little surprise is made just for you, with lots of love, memories, and heartfelt wishes. ❤️</p>
+            <button onclick="nextStep()" class="bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition">Next ❤️</button>
           </div>
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="images/photo2.jpg" alt="Memory 2">
-          </div>
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="images/photo3.jpg" alt="Memory 3">
-          </div>
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="images/photo4.jpg" alt="Memory 4">
-          </div>
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="images/photo5.jpg" alt="Memory 5">
-          </div>
-          <div class="gallery-item" onclick="openLightbox(this)">
-            <img src="images/photo6.jpg" alt="Memory 6">
-          </div>
-        </div>
+        </section>
 
-        <button onclick="showStep(5)" class="mt-7 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition">
-          Continue ❤️
-        </button>
-      </section>
-
-      <section class="step w-full" data-step="5">
-        
-        <div class="cake mb-8">
-          <div class="flame" id="flame"></div>
-          <div class="candle"></div>
-          <div class="cake-top"></div>
-          <div class="cake-base"></div>
-        </div>
-        <p class="mb-6 text-black/90">Click the candle flame to blow it out.</p>
-        <button onclick="blowCandle()"class="mt-8 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition">Blow Candle 🕯️</button>
-      </section>
-
-      <section class="step w-full" data-step="6">
-        <p class="uppercase tracking-[.35em] text-sm text-pink-100 mb-4">Final Message</p>
-        <h2 class="font-love text-5xl sm:text-7xl mb-6">Happy Birthday My Love 🎂</h2>
-        <div class="max-w-2xl mx-auto text-left bg-white/20 rounded-3xl p-6 border border-white/25">
-          <p class="text-lg leading-8 text-black/95">
-            On your special day, I just want to say that you are one of the most beautiful blessings in my life. Your smile makes my world softer, your presence makes my heart peaceful, and your love makes every day feel special.
+        <section class="step w-full" data-step="1">
+          <p class="uppercase tracking-[.35em] text-sm text-black mb-4">
+            A tiny surprise for you
           </p>
-          <p class="text-lg leading-8 text-black/95 mt-4">
-            May Allah bless you with endless happiness, health, success, love, and every dream your heart silently prays for. I am so lucky to have you. ❤️
+          <h1
+            class="font-love text-5xl sm:text-7xl text-pink-600 drop-shadow-lg mb-6"
+          >
+            Hey Beautiful
+          </h1>
+          <p class="text-lg italic sm:text-xl text-black/90 max-w-xl mx-auto mb-8">
+            Today is not just another day. It is the day when my favorite person came to this world.
           </p>
-        </div>
-        <button onclick="showStep(7)" class="mt-8 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition">One more thing 💌</button>
-      </section>
+          <button
+            onclick="nextStep()"
+            class="bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition"
+          >
+            Open Your Surprise 💝
+          </button>
+        </section>
 
-      <section class="step w-full" data-step="7">
-        <div class="max-w-2xl mx-auto glass rounded-3xl p-8 sm:p-12 border border-white/30">
-          <div class="ending-photo-wrap">
-            <img class="ending-photo" src="images/photo1.jpg" alt="A special memory">
-          </div>
-          <!-- <p class="uppercase tracking-[.35em] text-sm text-pink-100 mb-4">One more thing</p> -->
-          <h2 class="font-love text-5xl sm:text-7xl mb-6">Special Promises to you 💌</h2>
-          <p class="text-lg sm:text-xl leading-8 text-black/95">
-            No matter how many birthdays come and go, I hope you always remember how deeply loved, valued, and special you are to me. I’ll always be cheering for your happiness and praying for your beautiful future. ❤️
+        <section class="step w-full" data-step="2">
+          <h2 class="font-love text-pink-600 text-4xl sm:text-6xl mb-5">
+            First, catch my heart
+          </h2>
+          <p class="mb-6 text-black/90">
+            Click the floating heart 5 times to unlock your birthday wish.
           </p>
-        </div>
-        <button onclick="showStep(8)" class="mt-8 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition">Last but not the least 💕</button>
-      </section>
+          <div
+            class="relative h-72 rounded-3xl bg-white/15 overflow-hidden border border-white/20"
+            id="heartGame"
+          >
+            <button
+              id="catchHeart"
+              class="absolute text-6xl hover:scale-150 transition"
+            >
+              💖
+            </button>
+            <div
+              class="absolute left-4 top-4 bg-white/25 px-4 py-2 rounded-full"
+            >
+              Caught: <span id="score">0</span>/5
+            </div>
+          </div>
+        </section>
 
-      <section class="step w-full" data-step="8">
-        <div class="max-w-2xl mx-auto glass rounded-3xl p-8 sm:p-12 border border-white/30">
-          <div class="ending-photo2-wrap">
-            <img class="ending-photo2" src="images/photo2.jpg" alt="A beautiful memory">
+        <section class="step w-full" data-step="3">
+          <h2
+            class="font-love text-pink-600 text-4xl sm:text-6xl mb-7 text-transform: uppercase;"
+          >
+            A Gift For You
+          </h2>
+          <p class="mb-10 text-black/90">Tap the gift box gently.</p>
+          <div class="gift-box" onclick="openGift(this)">
+            <div class="gift-lid"></div>
           </div>
-          <!-- <div class="text-6xl mb-5 love-burst">💖</div> -->
-          <h2 class="font-love text-5xl sm:text-7xl mb-6">Lots of love for you</h2>
-          <p class="text-lg sm:text-xl leading-8 text-black/95">
-            Sending you all my love, warmest hugs, sweetest wishes, & countless little reasons to smile. You deserve all the love in the world today & every day. ❤️
+          <p
+            id="giftMessage"
+            class="hidden italic mt-10 text-2xl font-semibold text-black"
+          >
+            Inside this gift is my love, my prayers, and my forever smile for
+            you. ❤️
           </p>
-          <p class="font-love text-4xl sm:text-4xl mt-8">Forever yours 💕</p>
-        </div>
-        <button onclick="restartWish()" class="mt-8 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition">Replay Magic ✨</button>
-      </section>
+        </section>
+
+        <section class="step w-full" data-step="4">
+          <div class="pop-balloon-card">
+            <h2 class="font-love text-pink-600 text-4xl sm:text-6xl mb-3">
+              Pop the Balloons 🎈
+            </h2>
+            <p class="text-black/90">Pop all 4 balloons to continue! 💕</p>
+            <div class="pop-count">
+              Popped: <span id="balloonScore">0</span>/4
+            </div>
+            <div class="pop-balloon-area">
+              <button
+                class="pop-balloon bg-pink-400"
+                style="left: 8%; top: 45px"
+                onclick="popBalloon(this)"
+                aria-label="Pop balloon 1"
+              ></button
+              ><button
+                class="pop-balloon bg-purple-400"
+                style="left: 31%; top: 5px"
+                onclick="popBalloon(this)"
+                aria-label="Pop balloon 2"
+              ></button
+              ><button
+                class="pop-balloon bg-yellow-300"
+                style="left: 54%; top: 55px"
+                onclick="popBalloon(this)"
+                aria-label="Pop balloon 3"
+              ></button
+              ><button
+                class="pop-balloon bg-red-400"
+                style="left: 77%; top: 15px"
+                onclick="popBalloon(this)"
+                aria-label="Pop balloon 4"
+              ></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="step w-full" data-step="5">
+          <h2 class="font-love text-pink-600 text-4xl sm:text-6xl mb-3">Our Memories 📸</h2>
+          <!-- <p class="text-black/90">A little gallery of our favorite moments.</p> -->
+
+          <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox(this)">
+              <img src="images/photo1.jpg" alt="Memory 1" />
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+              <img src="images/photo2.jpg" alt="Memory 2" />
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+              <img src="images/photo3.jpg" alt="Memory 3" />
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+              <img src="images/photo4.jpg" alt="Memory 4" />
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+              <img src="images/photo5.jpg" alt="Memory 5" />
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+              <img src="images/photo6.jpg" alt="Memory 6" />
+            </div>
+          </div>
+
+          <button
+            onclick="showStep(6)"
+            class="mt-7 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition"
+          >
+            Continue ❤️
+          </button>
+        </section>
+
+        <section class="step w-full" data-step="6">
+          <div class="cake mb-8">
+            <div class="flame" id="flame"></div>
+            <div class="candle"></div>
+            <div class="cake-top"></div>
+            <div class="cake-base"></div>
+          </div>
+          <p class="mb-6 text-black/90">
+            Click the candle flame to blow it out.
+          </p>
+          <button
+            onclick="blowCandle()"
+            class="mt-8 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition"
+          >
+            Blow Candle 🕯️
+          </button>
+        </section>
+
+        <section class="step w-full" data-step="7">
+          <p class="uppercase tracking-[.35em] text-sm text-pink-100 mb-4">
+            Final Message
+          </p>
+          <h2 class="font-love text-pink-600 text-5xl sm:text-7xl mb-6">
+            Happy Birthday My Love 🎂
+          </h2>
+          <div
+            class="max-w-2xl mx-auto text-left bg-white/20 rounded-3xl p-6 border border-white/25"
+          >
+            <p class="text-lg italic leading-8 text-black/95">
+              On your special day, I just want to say that you are the
+              most beautiful blessings of my life. Your smile makes my world
+              softer, your presence makes my heart peaceful, and your love makes
+              every day feel special.
+            </p>
+            <p class="text-lg italic leading-8 text-black/95 mt-4">
+              May Allah bless you with endless happiness, health, success, love,
+              and every dream your heart silently prays for. I am so lucky to
+              have you. ❤️
+            </p>
+          </div>
+          <button
+            onclick="showStep(8)"
+            class="mt-8 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition"
+          >
+            One more thing 💌
+          </button>
+        </section>
+
+        <section class="step w-full" data-step="8">
+          <div
+            class="max-w-2xl mx-auto glass rounded-3xl p-8 sm:p-12 border border-white/30"
+          >
+            <div class="ending-photo-wrap">
+              <img
+                class="ending-photo"
+                src="images/photo1.jpg"
+                alt="A special memory"
+              />
+            </div>
+            <!-- <p class="uppercase tracking-[.35em] text-sm text-pink-100 mb-4">One more thing</p> -->
+            <h2 class="font-love text-pink-600 text-5xl sm:text-7xl mb-6">
+              Special Promises to you 💌
+            </h2>
+            <p class="text-lg italic sm:text-xl leading-8 text-black/95">
+              No matter how many birthdays come and go, I hope you always
+              remember how deeply loved, valued, and special you are to me. I’ll
+              always be cheering for your happiness and praying for your
+              beautiful future with me.❤️
+            </p>
+          </div>
+          <button
+            onclick="showStep(9)"
+            class="mt-8 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition"
+          >
+            Last but not the least 💕
+          </button>
+        </section>
+
+        <section class="step w-full" data-step="9">
+          <div
+            class="max-w-2xl mx-auto glass rounded-3xl p-8 sm:p-12 border border-white/30"
+          >
+            <div class="ending-photo2-wrap">
+              <img
+                class="ending-photo2"
+                src="images/photo2.jpg"
+                alt="A beautiful memory"
+              />
+            </div>
+            <!-- <div class="text-6xl mb-5 love-burst">💖</div> -->
+            <h2 class="font-love text-pink-600 text-5xl sm:text-7xl mb-6">
+              Lots of love for you
+            </h2>
+            <p class="text-lg italic sm:text-xl leading-8 text-black/95">
+              Sending you all my love, warmest hugs, sweetest wishes, &
+              countless little reasons to smile. You deserve all the love in the
+              world today & every day. ❤️
+            </p>
+            <p class="font-love text-pink-600 text-4xl sm:text-4xl mt-8">Forever yours 💕</p>
+          </div>
+          <button
+            onclick="restartWish()"
+            class="mt-8 bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 active:scale-95 transition"
+          >
+            Replay Surprise ✨
+          </button>
+        </section>
+      </div>
+    </main>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+      <button class="lightbox-close" aria-label="Close">✕</button>
+      <img
+        id="lightboxImage"
+        src=""
+        alt="Expanded memory"
+        onclick="event.stopPropagation()"
+      />
     </div>
-  </main>
 
+    <script>
+      let currentStep = 0;
+      let score = 0;
+      let balloonScore = 0;
+      const steps = document.querySelectorAll(".step");
+      const catchHeart = document.getElementById("catchHeart");
+      const heartGame = document.getElementById("heartGame");
+      const scoreEl = document.getElementById("score");
+      const balloonScoreEl = document.getElementById("balloonScore");
 
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <button class="lightbox-close" aria-label="Close">✕</button>
-    <img id="lightboxImage" src="" alt="Expanded memory" onclick="event.stopPropagation()">
-  </div>
-
-  <script>
-    let currentStep = 0;
-    let score = 0;
-    let balloonScore = 0;
-    const steps = document.querySelectorAll('.step');
-    const catchHeart = document.getElementById('catchHeart');
-    const heartGame = document.getElementById('heartGame');
-    const scoreEl = document.getElementById('score');
-    const balloonScoreEl = document.getElementById('balloonScore');
-
-    function showStep(index) {
-      steps.forEach(step => step.classList.remove('active'));
-      steps[index].classList.add('active');
-      currentStep = index;
-      if (index === 1) moveHeart();
-      if (index === 6 || index === 8) launchConfetti();
-    }
-
-    function nextStep() {
-      showStep(currentStep + 1);
-    }
-
-    function createFloatingHearts() {
-      setInterval(() => {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.innerHTML = ['❤️','💖','💕','💗','💘'][Math.floor(Math.random() * 5)];
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.fontSize = (18 + Math.random() * 28) + 'px';
-        heart.style.animationDuration = (4 + Math.random() * 4) + 's';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 8000);
-      }, 350);
-    }
-
-    function createSparkles() {
-      for (let i = 0; i < 35; i++) {
-        const sp = document.createElement('div');
-        sp.className = 'sparkle';
-        sp.style.left = Math.random() * 100 + 'vw';
-        sp.style.top = Math.random() * 100 + 'vh';
-        sp.style.animationDelay = Math.random() * 3 + 's';
-        document.body.appendChild(sp);
+      function showStep(index) {
+        steps.forEach((step) => step.classList.remove("active"));
+        steps[index].classList.add("active");
+        currentStep = index;
+        if (index === 2) moveHeart();
+        if (index === 7 || index === 9) launchConfetti();
       }
-    }
 
-    function moveHeart() {
-      const maxX = heartGame.clientWidth - 70;
-      const maxY = heartGame.clientHeight - 70;
-      catchHeart.style.left = Math.random() * maxX + 'px';
-      catchHeart.style.top = Math.random() * maxY + 'px';
-    }
-
-    catchHeart.addEventListener('click', () => {
-      score++;
-      scoreEl.textContent = score;
-      catchHeart.classList.add('shake');
-      setTimeout(() => catchHeart.classList.remove('shake'), 450);
-      if (score >= 5) {
-        setTimeout(() => showStep(2), 1500);
-      } else {
-        moveHeart();
+      function nextStep() {
+        showStep(currentStep + 1);
       }
-    });
 
-    function openGift(box) {
-      box.classList.add('open');
-      document.getElementById('giftMessage').classList.remove('hidden');
-      launchConfetti(50);
-      setTimeout(() => showStep(3), 3000);
-    }
-
-    function popBalloon(balloon) {
-      if (balloon.classList.contains('pop')) return;
-      balloon.classList.add('pop');
-      balloonScore++;
-      balloonScoreEl.textContent = balloonScore;
-      launchConfetti(18);
-      if (balloonScore === 4) setTimeout(() => showStep(4), 1000);
-    }
-
-    function blowCandle() {
-      document.getElementById('flame').style.display = 'none';
-      launchConfetti(120);
-      setTimeout(() => showStep(6), 2500);
-    }
-
-    function launchConfetti(amount = 100) {
-      const colors = ['#ff4d94', '#fff176', '#7c4dff', '#00e5ff', '#ffffff', '#ff1744'];
-      for (let i = 0; i < amount; i++) {
-        const c = document.createElement('div');
-        c.className = 'confetti';
-        c.style.left = Math.random() * 100 + 'vw';
-        c.style.background = colors[Math.floor(Math.random() * colors.length)];
-        c.style.animationDelay = Math.random() * 1.2 + 's';
-        c.style.animationDuration = (2 + Math.random() * 2.5) + 's';
-        document.body.appendChild(c);
-        setTimeout(() => c.remove(), 4500);
+      function createFloatingHearts() {
+        setInterval(() => {
+          const heart = document.createElement("div");
+          heart.className = "heart";
+          heart.innerHTML = ["❤️", "💖", "💕", "💗", "💘"][
+            Math.floor(Math.random() * 5)
+          ];
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.fontSize = 18 + Math.random() * 28 + "px";
+          heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 8000);
+        }, 350);
       }
-    }
 
-
-    const bgMusic = document.getElementById('bgMusic');
-    const musicToggle = document.getElementById('musicToggle');
-
-    function toggleMusic() {
-      if (bgMusic.paused) {
-        bgMusic.play().then(() => {
-          musicToggle.textContent = '🎵 Music: On';
-        }).catch(() => {
-          musicToggle.textContent = '🎵 Add music file';
-        });
-      } else {
-        bgMusic.pause();
-        musicToggle.textContent = '🎵 Music: Off';
+      function createSparkles() {
+        for (let i = 0; i < 35; i++) {
+          const sp = document.createElement("div");
+          sp.className = "sparkle";
+          sp.style.left = Math.random() * 100 + "vw";
+          sp.style.top = Math.random() * 100 + "vh";
+          sp.style.animationDelay = Math.random() * 3 + "s";
+          document.body.appendChild(sp);
+        }
       }
-    }
 
-    // Browsers usually require the first audio play to follow a user gesture.
-    document.addEventListener('click', () => {
-      if (bgMusic.paused) {
-        bgMusic.play().then(() => {
-          musicToggle.textContent = '🎵 Music: On';
-        }).catch(() => {});
+      function moveHeart() {
+        const maxX = heartGame.clientWidth - 70;
+        const maxY = heartGame.clientHeight - 70;
+        catchHeart.style.left = Math.random() * maxX + "px";
+        catchHeart.style.top = Math.random() * maxY + "px";
       }
-    }, { once: true });
 
-    function openLightbox(item) {
-      const img = item.querySelector('img');
-      document.getElementById('lightboxImage').src = img.src;
-      document.getElementById('lightbox').classList.add('open');
-    }
+      catchHeart.addEventListener("click", () => {
+        score++;
+        scoreEl.textContent = score;
+        catchHeart.classList.add("shake");
+        setTimeout(() => catchHeart.classList.remove("shake"), 450);
+        if (score >= 5) {
+          setTimeout(() => showStep(3), 1500);
+        } else {
+          moveHeart();
+        }
+      });
 
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-    }
+      function openGift(box) {
+        box.classList.add("open");
+        document.getElementById("giftMessage").classList.remove("hidden");
+        launchConfetti(50);
+        setTimeout(() => showStep(4), 3000);
+      }
 
-    function restartWish() {
-      score = 0;
-      scoreEl.textContent = '0';
-      balloonScore = 0;
-      balloonScoreEl.textContent = '0';
-      document.querySelectorAll('.pop-balloon').forEach(b => b.classList.remove('pop'));
-      document.getElementById('flame').style.display = 'block';
-      document.getElementById('giftMessage').classList.add('hidden');
-      document.querySelector('.gift-box').classList.remove('open');
-      showStep(0);
-    }
+      function popBalloon(balloon) {
+        if (balloon.classList.contains("pop")) return;
+        balloon.classList.add("pop");
+        balloonScore++;
+        balloonScoreEl.textContent = balloonScore;
+        launchConfetti(18);
+        if (balloonScore === 4) setTimeout(() => showStep(5), 1000);
+      }
 
-    createFloatingHearts();
-    createSparkles();
-  </script>
-</body>
+      function blowCandle() {
+        document.getElementById("flame").style.display = "none";
+        launchConfetti(120);
+        setTimeout(() => showStep(7), 2500);
+      }
+
+      function launchConfetti(amount = 100) {
+        const colors = [
+          "#ff4d94",
+          "#fff176",
+          "#7c4dff",
+          "#00e5ff",
+          "#ffffff",
+          "#ff1744",
+        ];
+        for (let i = 0; i < amount; i++) {
+          const c = document.createElement("div");
+          c.className = "confetti";
+          c.style.left = Math.random() * 100 + "vw";
+          c.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+          c.style.animationDelay = Math.random() * 1.2 + "s";
+          c.style.animationDuration = 2 + Math.random() * 2.5 + "s";
+          document.body.appendChild(c);
+          setTimeout(() => c.remove(), 4500);
+        }
+      }
+
+      const bgMusic = document.getElementById("bgMusic");
+      const musicToggle = document.getElementById("musicToggle");
+
+      function toggleMusic() {
+        if (bgMusic.paused) {
+          bgMusic
+            .play()
+            .then(() => {
+              musicToggle.textContent = "🎵 Music: On";
+            })
+            .catch(() => {
+              musicToggle.textContent = "🎵 Add music file";
+            });
+        } else {
+          bgMusic.pause();
+          musicToggle.textContent = "🎵 Music: Off";
+        }
+      }
+
+      // Browsers usually require the first audio play to follow a user gesture.
+      document.addEventListener(
+        "click",
+        () => {
+          if (bgMusic.paused) {
+            bgMusic
+              .play()
+              .then(() => {
+                musicToggle.textContent = "🎵 Music: On";
+              })
+              .catch(() => {});
+          }
+        },
+        { once: true },
+      );
+
+      function openLightbox(item) {
+        const img = item.querySelector("img");
+        document.getElementById("lightboxImage").src = img.src;
+        document.getElementById("lightbox").classList.add("open");
+      }
+
+      function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("open");
+      }
+
+      function restartWish() {
+        score = 0;
+        scoreEl.textContent = "0";
+        balloonScore = 0;
+        balloonScoreEl.textContent = "0";
+        document
+          .querySelectorAll(".pop-balloon")
+          .forEach((b) => b.classList.remove("pop"));
+        document.getElementById("flame").style.display = "block";
+        document.getElementById("giftMessage").classList.add("hidden");
+        document.querySelector(".gift-box").classList.remove("open");
+        showStep(0);
+      }
+
+      createFloatingHearts();
+      createSparkles();
+    </script>
+  </body>
 </html>
